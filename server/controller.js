@@ -1,40 +1,23 @@
 const fortunes = ['You will cure cancer', 'You will go to the moon.', 'You will win the lottery.', 'Your happiness is right under your nose', 'Those with you are your closest allies.'] 
 
-const encouragement = ['You\'ll get there, dont\'t worry.', 'Keep your head up', "This is your lifes dream, keep going", '']
+const encouragement = ['You\'ll get there, dont\'t worry.', 'Keep your head up', "This is your lifes dream, keep going",]
 
 
 const fruits = ['apple', 'bannana', 'jackfruit', 'strawberry', 'pear']
 
 const specs = ['webdev', 'cybersecurity', 'data-analytics', 'ux-design', 'ios-developement']
-// const fortunes = [
 
-//     {
-//         "fortune": 'You will cure cancer',
-//         "id" : 1
+const hobbiesArr = [
+    {
+        hobby: 'climbing',
+        name: 'Bob'
+    },
+    {
+        hobby: 'Snowbaording',
+        name: 'Laura'
+    },
+]
 
-//     },
-
-//     {
-//         "fortune": 'You will go to the moon.',
-//         "id" : 2
-//     },
-
-//     {
-//         "fortune" : 'Your happiness is right under your nose',
-//         "id" : 3
-//     },
-//     {
-//         "fortune" : 'You will win the lottery.',
-//         "id" : 4
-//     },
-//     {
-//         "fortune" : 'Those with you are your closest allies.',
-//         "id" : 5
-//     }
-
-// ]
-
-// let globalId = 6
 
 module.exports = {
 
@@ -71,7 +54,19 @@ module.exports = {
         let randomSpecs = specs[randomIndex]
 
         res.status(200).send(randomSpecs)
-    }
+    },
+    addHobbies: (req, res) =>{
+        let {name, hobby} = req.body
+
+        let newHobbiest = {
+            name: name,
+            hobby: hobby,
+        }
+        hobbiesArr.push(newHobbiest)
+        console.log(hobbiesArr)
+        res.status(200).send(newHobbiest)
+        
+    },
     
     // addFortune: (req, res) => {
     //     let {fortune} = req.body

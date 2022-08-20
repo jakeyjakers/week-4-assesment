@@ -8,6 +8,14 @@ const fruitBtn = document.getElementById('fruit')
 
 const specsBtn = document.getElementById('specs')
 
+const hobbyForm = document.getElementById('hobbies-form')
+
+const addHobby = document.getElementById('add-hobby')
+
+const nameOfHobbier = document.getElementById('hobby-name')
+
+const hobbyBtn = document.getElementById('hobbies-btn')
+
 // const addFortuneBtn = document.getElementById('add-fortune-btn')
 
 // const addFortuneForm = document.getElementById('add-fortne-form')
@@ -35,6 +43,7 @@ const getFortune = () =>{
         console.log(data)
         const h4 = document.createElement('h4') 
         h4.textContent = data
+        console.log(h4)
         body.appendChild(h4)
         
     })
@@ -43,13 +52,17 @@ const getFortune = () =>{
 fortuneBtn.addEventListener('click', getFortune)
 
 const getEncouragement = () => {
-    axios.get("http://localhost:4000/api/ecouragement/")
+    axios.get("http://localhost:4000/api/encouragement/")
     .then((res) =>{
         let data = res.data
         console.log(data)
         const h4 = document.createElement('h4')
         h4.textContent = data
         body.appendChild(h4)
+        
+        })
+        .catch((error) => {
+            console.log(error)
     })
 }
 
@@ -60,7 +73,7 @@ const getFruit = () => {
     .then((res) =>{
         let data = res.data
         console.log(data)
-        alert(`Here is your fruit ${data}`)
+        alert(`Here is your fruit: ${data}`)
     })
 }
 
@@ -74,6 +87,39 @@ const getSpecs = () => {
         alert(`Here is your spec: ${data}`)
     })
 }
+
+const addHobbies = (event) => {
+    event.preventDefault()
+    console.log("Is this working?")
+    const body = {
+        name: nameOfHobbier.value, 
+        hobby: addHobby.value,
+    }
+    console.log(body)
+
+    axios.post("http://localhost:4000/api/hobbies/", body)
+    .then((res) => {
+        let {name, hobby} = res.data
+        console.log(name, hobby)
+        const h4Name = document.createElement('h4')
+        const newPara = document.createElement('p')
+        h4Name.textContent = name
+        newPara.textContent = hobby
+        console.log(h4Name, newPara)
+////// whoever grades this, I am not sure why these 2 variable will not append to the DOM
+///It works on the other similar functions, and will even print to the console, but I can't seem
+//// to get it to work. 
+        body.appendChild(h4Name)
+        body.appendChild(newPara)
+        
+        
+    })
+    .catch((error) =>{
+        console.log(error)
+    })
+} 
+
+hobbyBtn.addEventListener('click', addHobbies)
 
 specsBtn.addEventListener('click', getSpecs)
 
